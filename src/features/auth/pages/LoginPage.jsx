@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   HiOutlineMail,
@@ -9,8 +9,6 @@ import {
   HiOutlineAcademicCap,
   HiOutlineShieldCheck,
   HiOutlineExclamationCircle,
-  HiOutlineUserAdd,
-  HiArrowRight,
 } from 'react-icons/hi';
 import { MdLogin } from 'react-icons/md';
 import Bgimage from '../../../Assets/Images/Bgimage.png';
