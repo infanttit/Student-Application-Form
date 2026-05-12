@@ -76,7 +76,7 @@ export async function registerStudentApplication(payload) {
   const panchayat = String(payload?.panchayat || '').trim();
   const state = String(payload?.state || '').trim();
 
-  if (!firstName || !lastName || !dob || !gender) return { ok: false, error: 'Missing required student details.' };
+  if (!firstName || !dob || !gender) return { ok: false, error: 'Missing required student details.' };
   if (!email || !phone) return { ok: false, error: 'Email and phone are required.' };
   if (!password) return { ok: false, error: 'Password is required.' };
   if (!address1 || !address2 || !city || !region || !pincode || !panchayat || !state) return { ok: false, error: 'Missing required address details.' };

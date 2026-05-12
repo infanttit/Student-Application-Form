@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import LoginPage from './features/auth/pages/LoginPage';
 import RegisterPage from './features/auth/pages/RegisterPage';
 import ForgotPasswordPage from './features/auth/pages/ForgotPasswordPage';
 import WelcomePage from './features/auth/pages/WelcomePage';
-import { getCurrentUser } from './shared/services/mockApi';
+import { fetchProfile } from './shared/services/authApi';
+import { getToken } from './shared/services/authToken';
 
 function LoadingScreen() {
   return (
@@ -28,13 +29,24 @@ function RequireAuth({ user, loading, children }) {
 export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const didInit = useRef(false);
 
   useEffect(() => {
+    if (didInit.current) return;
+    didInit.current = true;
+
     let cancelled = false;
     async function load() {
       setLoading(true);
-      const res = await getCurrentUser();
-      if (!cancelled) setUser(res.ok ? res.user : null);
+      const token = getToken();
+      if (!token) {
+        if (!cancelled) setUser(null);
+        if (!cancelled) setLoading(false);
+        return;
+      }
+
+      const res = await fetchProfile();
+      if (!cancelled) setUser(res.ok ? res.data : null);
       if (!cancelled) setLoading(false);
     }
     load();
