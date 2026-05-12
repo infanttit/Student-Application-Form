@@ -8,7 +8,6 @@ import {
   HiOutlineHome,
   HiOutlineLocationMarker,
   HiOutlineMap,
-  HiOutlineShieldCheck,
   HiOutlineCheckCircle,
   HiOutlineExclamationCircle,
   HiOutlineOfficeBuilding,
