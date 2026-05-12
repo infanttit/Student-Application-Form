@@ -79,7 +79,9 @@ export async function registerStudentApplication(payload) {
   if (!firstName || !dob || !gender) return { ok: false, error: 'Missing required student details.' };
   if (!email || !phone) return { ok: false, error: 'Email and phone are required.' };
   if (!password) return { ok: false, error: 'Password is required.' };
-  if (!address1 || !address2 || !city || !region || !pincode || !panchayat || !state) return { ok: false, error: 'Missing required address details.' };
+  // Address requirements for the mock flow:
+  // - `address2`, `city`, and `state` are optional (UI may hide them)
+  if (!address1 || !region || !pincode || !panchayat) return { ok: false, error: 'Missing required address details.' };
 
   if (db.users.some((u) => u.email === email)) return { ok: false, error: 'Email already registered.' };
   if (db.users.some((u) => u.phone === phone)) return { ok: false, error: 'Phone already registered.' };
@@ -96,11 +98,11 @@ export async function registerStudentApplication(payload) {
       gender,
       address1,
       address2,
-      city,
+      city: city || 'NA',
       region,
       pincode,
       panchayat,
-      state,
+      state: state || 'NA',
     },
     createdAt: new Date().toISOString(),
   };
@@ -117,11 +119,11 @@ export async function registerStudentApplication(payload) {
     password,
     address1,
     address2,
-    city,
+    city: city || 'NA',
     region,
     pincode,
     panchayat,
-    state,
+    state: state || 'NA',
     createdAt: new Date().toISOString(),
   };
 

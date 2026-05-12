@@ -4,7 +4,7 @@ import LoginPage from './features/auth/pages/LoginPage';
 import RegisterPage from './features/auth/pages/RegisterPage';
 import ForgotPasswordPage from './features/auth/pages/ForgotPasswordPage';
 import WelcomePage from './features/auth/pages/WelcomePage';
-import { fetchProfile } from './shared/services/authApi';
+import { fetchProfile } from './shared/services/authService';
 import { getToken } from './shared/services/authToken';
 
 function LoadingScreen() {
